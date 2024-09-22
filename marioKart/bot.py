@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'marioKart.settings')
 django.setup()
 
-from models import Users
+from marioKart.models import Users
 
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError

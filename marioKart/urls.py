@@ -17,7 +17,9 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from marioKart.views import test_slackbot_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("test_slackbot/", test_slackbot_view, name="test_slackbot"),
 ]
