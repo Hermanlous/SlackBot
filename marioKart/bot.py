@@ -1,8 +1,20 @@
 import os
+import django
+import sys
+
+#legger til rotmappen til prosjektet i sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'marioKart.settings')
+django.setup()
+
+from models import Users
+
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 from decouple import config
-from models import Users
+
 
 SLACK_BOT_TOKEN = config('SLACK_BOT_TOKEN')
 
@@ -19,16 +31,15 @@ def send_dm(user_id, message):
 
 def get_user_by_email(email):
     try:
-        user = Users.objects.get(mail = email)
+        user = Users.objects.get(email = email)
         return user
     except Users.DoesNotExist:
         print("User not found")
         return None
 
 def get_slack_user_id_by_email(email):
-    user = get_user_by_email(email)
     try:
-        response = client.users.lookupByEmail(user.email)
+        response = client.users_lookupByEmail(email=email)
         return response['user']['id']
     except:
         print("User not found")

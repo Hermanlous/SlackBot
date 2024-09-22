@@ -20,9 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRT_KEY = config('SECRET_KEY')
-
+SECRET_KEY = config('SECRET_KEY', default='temporary_secret_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -39,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "marioKart",
 ]
 
 MIDDLEWARE = [
@@ -82,7 +81,7 @@ DATABASES = {
         "USER": config('DB_USER'),
         "PASSWORD": config('DB_PASSWORD'),
         "HOST": config('DB_HOST'),
-        "PORT": config('DB_PORT', cast=int),  # Hvis porten er et tall, bruk cast=int
+        "PORT": config('DB_PORT'),  
     }
 }
 
